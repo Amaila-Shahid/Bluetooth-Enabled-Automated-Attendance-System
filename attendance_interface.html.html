@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Attendance Sheet</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #a0c4ff, #001f54);
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: normal;
+      margin: 5px 0;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: lighter;
+      margin-bottom: 10px;
+    }
+
+    .department {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      font-weight: lighter;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #ffffff;
+      color: #001f54;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e0e0e0;
+    }
+
+    .status {
+      margin-top: 20px;
+      font-size: 1.1rem;
+    }
+
+    .university {
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="university">
+      <h1>The Islamia University of Bahawalpur</h1>
+      <h2>Instructor: Dr. Hira Asghar</h2>
+      <h3>Subject: Network Security</h3>
+      <div class="department">Department: Computer Systems Engineering</div>
+    </div>
+
+    <button onclick="startAttendance()">Start Marking Attendance</button>
+    <div class="status" id="statusMessage"></div>
+  </div>
+
+<script>
+    function startAttendance() {
+      const statusEl = document.getElementById("statusMessage");
+      const timeEl = document.getElementById("timestamp");
+
+      statusEl.innerText = "🔄 Sending request to start attendance...";
+      timeEl.innerText = "";
+
+      fetch("http://192.168.4.1/start") // Replace with your ESP32 IP address
+        .then(response => {
+          if (response.ok) {
+            statusEl.innerText = "✅ Attendance marking started!";
+            const now = new Date();
+            timeEl.innerText = `🕒 Time: ${now.toLocaleString()}`;
+          } else {
+            statusEl.innerText = "⚠️ Failed to start attendance.";
+          }
+        })
+        .catch(error => {
+          statusEl.innerText = "❌ Unable to connect. Check ESP32 and Wi-Fi.";
+        });
+    }
+  </script>
+
+</body>
+</html>
