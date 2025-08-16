@@ -22,7 +22,7 @@ struct Student {
 // Student list
 Student students[] = {
   {"88:9F:6F:67:7D:89", "Ayesha", "22"},
-  {"98:09:cf:89:2d:e9", "Hashim",  "6"},
+  {"98:09:cf:89:2d:e9", "Hafsa",  "6"},
   {"d4:63:de:fc:0e:ef", "Amaila", "12"},
   {"F4:5C:89:77:88:99", "Fakhra", "10"},
   {"D8:BF:C0:DE:AD:BE", "Diya",   "30"},
